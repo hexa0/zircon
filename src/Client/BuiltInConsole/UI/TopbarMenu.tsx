@@ -10,6 +10,7 @@ import { ZirconContext, ZirconLogLevel } from "Client/Types";
 import ThemeContext from "Client/UIKit/ThemeContext";
 import ZirconClientStore from "../Store";
 import { ConsoleActionName, ConsoleReducer, DEFAULT_FILTER } from "../Store/_reducers/ConsoleReducer";
+import { GuiService } from "@rbxts/services";
 
 export interface TopbarProps extends MappedProps, MappedDispatch {}
 interface TopbarState {
@@ -40,10 +41,10 @@ class ZirconTopbarMenuComponent extends Roact.Component<TopbarProps, TopbarState
 					<screengui DisplayOrder={10001} ResetOnSpawn={false} IgnoreGuiInset>
 						<frame
 							Visible={this.state.isVisible}
-							Size={new UDim2(1, 0, 0, 40)}
+							Size={new UDim2(1, 0, 0, GuiService.TopbarInset.Height)}
 							BackgroundColor3={theme.PrimaryBackgroundColor3}
 							BorderSizePixel={0}
-							Position={this.state.isVisible ? new UDim2(0, 0, 0, 0) : new UDim2(0, 0, 0, -40)}
+							Position={this.state.isVisible ? new UDim2(0, 0, 0, 0) : new UDim2(0, 0, 0, -GuiService.TopbarInset.Height)}
 						>
 							<uipadding PaddingLeft={new UDim(0, 60)} />
 							<uilistlayout
