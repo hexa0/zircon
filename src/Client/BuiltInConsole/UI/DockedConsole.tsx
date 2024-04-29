@@ -12,7 +12,7 @@ import ZirconClientStore from "../Store";
 import ThemeContext from "../../../Client/UIKit/ThemeContext";
 import { ZirconContext, ZirconLogLevel, ZirconMessageType } from "../../../Client/Types";
 import Dropdown from "Client/Components/Dropdown";
-import { Workspace } from "@rbxts/services";
+import { GuiService, Workspace } from "@rbxts/services";
 import Padding from "Client/Components/Padding";
 import SearchTextBox from "Client/Components/SearchTextBox";
 import MultiSelectDropdown from "Client/Components/MultiSelectDropdown";
@@ -100,10 +100,10 @@ class ZirconConsoleComponent extends Roact.Component<DockedConsoleProps, DockedC
 			prevState.filterVisible !== this.state.filterVisible
 		) {
 			const fullScreenViewSize = Workspace.CurrentCamera!.ViewportSize;
-			const size = this.state.isFullView ? fullScreenViewSize.Y - 40 : MAX_SIZE;
-			this.positionYMotor.setGoal(new Spring(this.props.isVisible ? size + 40 : 0));
+			const size = this.state.isFullView ? fullScreenViewSize.Y - GuiService.TopbarInset.Height : MAX_SIZE;
+			this.positionYMotor.setGoal(new Spring(this.props.isVisible ? size + GuiService.TopbarInset.Height : 0));
 			this.outputTransparencyMotor.setGoal(new Spring(this.state.isFullView ? 0.35 : 0.1));
-			this.filterSettingsSizeY.setGoal(new Spring(this.state.isFullView || this.state.filterVisible ? 40 : 0));
+			this.filterSettingsSizeY.setGoal(new Spring(this.state.isFullView || this.state.filterVisible ? GuiService.TopbarInset.Height : 0));
 			this.sizeYMotor.setGoal(new Spring(size));
 			this.setState({ isVisible: this.props.isVisible });
 		}
